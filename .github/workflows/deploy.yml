@@ -27,9 +27,15 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Debug - List dist contents
+        run: |
+          echo "Contents of dist directory:"
+          ls -la dist/
+          echo "Contents of dist directory (recursive):"
+          find dist/ -type f
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          folder: dist  # папка, куда собирается ваш проект
-          branch: gh-pages  # ветка, куда будет публиковаться сайт
-          token: ${{ secrets.GITHUB_TOKEN }} 
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./dist

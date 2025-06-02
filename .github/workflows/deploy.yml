@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout
@@ -29,4 +31,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist  # папка, куда собирается ваш проект
-          branch: gh-pages  # ветка, куда будет публиковаться сайт 
+          branch: gh-pages  # ветка, куда будет публиковаться сайт
+          token: ${{ secrets.GITHUB_TOKEN }} 
